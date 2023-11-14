@@ -5,7 +5,7 @@
   tasks:
     - name: Fetch files from the remote server
       copy:
-        src: /home/aadmin/ansible/playbooks/project1/
+        src: /var/lib/jenkins/workspace/My_project/
         dest: /home/aadmin/project
 
     - name: Building the my docker images
