@@ -1,0 +1,26 @@
+---
+- hosts: all
+  gather_facts: no
+  become: yes
+  tasks:
+    - name: Fetch files from the remote server
+      copy:
+        src: /home/aadmin/ansible/playbooks/project1/
+        dest: /home/aadmin/project
+
+    - name: Building the my docker images
+      docker_image:
+        name: nginx_image:v1
+        build:
+          path: /home/aadmin/project/
+        source: build
+        state: present
+
+    - name: Creating the container and start
+      docker_container:
+        name: nginx_container
+        image: nginx_image:v1
+        ports:
+          - "81:80"
+        state: started
+
